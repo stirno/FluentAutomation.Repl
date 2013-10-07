@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FluentAutomation.SeleniumWebDriver</name>
+    </assembly>
+    <members>
+        <member name="T:FluentAutomation.SeleniumWebDriver">
+            <summary>
+            Selenium WebDriver FluentAutomation Provider
+            </summary>
+        </member>
+        <member name="F:FluentAutomation.SeleniumWebDriver.SelectedBrowser">
+            <summary>
+            Currently selected <see cref="T:FluentAutomation.SeleniumWebDriver.Browser"/>.
+            </summary>
+        </member>
+        <member name="M:FluentAutomation.SeleniumWebDriver.Bootstrap">
+            <summary>
+            Bootstrap Selenium provider and utilize Firefox.
+            </summary>
+        </member>
+        <member name="M:FluentAutomation.SeleniumWebDriver.Bootstrap(FluentAutomation.SeleniumWebDriver.Browser)">
+            <summary>
+            Bootstrap Selenium provider and utilize the specified <paramref name="browser"/>.
+            </summary>
+            <param name="browser"></param>
+        </member>
+        <member name="M:FluentAutomation.SeleniumWebDriver.Bootstrap(System.Uri,FluentAutomation.SeleniumWebDriver.Browser)">
+            <summary>
+            Bootstrap Selenium provider using a Remote web driver targetting the requested browser
+            </summary>
+            <param name="driverUri"></param>
+            <param name="capabilities"></param>
+        </member>
+        <member name="M:FluentAutomation.SeleniumWebDriver.Bootstrap(System.Uri,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Bootstrap Selenium provider using a Remote web driver service with the requested capabilities
+            </summary>
+            <param name="driverUri"></param>
+            <param name="capabilities"></param>
+        </member>
+        <member name="T:FluentAutomation.SeleniumWebDriver.Browser">
+            <summary>
+            Supported browsers for the FluentAutomation Selenium provider.
+            </summary>
+        </member>
+        <member name="F:FluentAutomation.SeleniumWebDriver.Browser.InternetExplorer">
+            <summary>
+            Internet Explorer. Before using, make sure to set ProtectedMode settings to be the same for all zones.
+            </summary>
+        </member>
+        <member name="F:FluentAutomation.SeleniumWebDriver.Browser.InternetExplorer64">
+            <summary>
+            Internet Explorer (64-bit). Before using, make sure to set ProtectedMode settings to be the same for all zones.
+            </summary>
+        </member>
+        <member name="F:FluentAutomation.SeleniumWebDriver.Browser.Firefox">
+            <summary>
+            Mozilla Firefox
+            </summary>
+        </member>
+        <member name="F:FluentAutomation.SeleniumWebDriver.Browser.Chrome">
+            <summary>
+            Google Chrome
+            </summary>
+        </member>
+        <member name="F:FluentAutomation.SeleniumWebDriver.Browser.PhantomJs">
+            <summary>
+            PhantomJS - Headless browser - Support is Experimental
+            </summary>
+        </member>
+    </members>
+</doc>

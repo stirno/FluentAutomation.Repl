@@ -1,0 +1,1678 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FluentAutomation.Core</name>
+    </assembly>
+    <members>
+        <member name="M:TinyIoC.TypeExtensions.GetGenericMethod(System.Type,System.Reflection.BindingFlags,System.String,System.Type[],System.Type[])">
+            <summary>
+            Gets a generic method from a type given the method name, binding flags, generic types and parameter types
+            </summary>
+            <param name="sourceType">Source type</param>
+            <param name="bindingFlags">Binding flags</param>
+            <param name="methodName">Name of the method</param>
+            <param name="genericTypes">Generic types to use to make the method generic</param>
+            <param name="parameterTypes">Method parameters</param>
+            <returns>MethodInfo or null if no matches found</returns>
+            <exception cref="T:System.Reflection.AmbiguousMatchException"/>
+            <exception cref="T:System.ArgumentException"/>
+        </member>
+        <member name="T:TinyIoC.NamedParameterOverloads">
+            <summary>
+            Name/Value pairs for specifying "user" parameters when resolving
+            </summary>
+        </member>
+        <member name="F:TinyIoC.UnregisteredResolutionActions.AttemptResolve">
+            <summary>
+            Attempt to resolve type, even if the type isn't registered.
+            
+            Registered types/options will always take precedence.
+            </summary>
+        </member>
+        <member name="F:TinyIoC.UnregisteredResolutionActions.Fail">
+            <summary>
+            Fail resolution if type not explicitly registered
+            </summary>
+        </member>
+        <member name="F:TinyIoC.UnregisteredResolutionActions.GenericsOnly">
+            <summary>
+            Attempt to resolve unregistered type if requested type is generic
+            and no registration exists for the specific generic parameters used.
+            
+            Registered types/options will always take precedence.
+            </summary>
+        </member>
+        <member name="T:TinyIoC.ResolveOptions">
+            <summary>
+            Resolution settings
+            </summary>
+        </member>
+        <member name="P:TinyIoC.ResolveOptions.Default">
+            <summary>
+            Gets the default options (attempt resolution of unregistered types, fail on named resolution if name not found)
+            </summary>
+        </member>
+        <member name="P:TinyIoC.ResolveOptions.FailNameNotFoundOnly">
+            <summary>
+            Preconfigured option for attempting resolution of unregistered types and failing on named resolution if name not found
+            </summary>
+        </member>
+        <member name="P:TinyIoC.ResolveOptions.FailUnregisteredAndNameNotFound">
+            <summary>
+            Preconfigured option for failing on resolving unregistered types and on named resolution if name not found
+            </summary>
+        </member>
+        <member name="P:TinyIoC.ResolveOptions.FailUnregisteredOnly">
+            <summary>
+            Preconfigured option for failing on resolving unregistered types, but attempting unnamed resolution if name not found
+            </summary>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.AutoRegister">
+            <summary>
+            Attempt to automatically register all non-generic classes and interfaces in the current app domain.
+            
+            If more than one class implements an interface then only one implementation will be registered
+            although no error will be thrown.
+            </summary>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.AutoRegister(System.Func{System.Type,System.Boolean})">
+            <summary>
+            Attempt to automatically register all non-generic classes and interfaces in the current app domain.
+            Types will only be registered if they pass the supplied registration predicate.
+            
+            If more than one class implements an interface then only one implementation will be registered
+            although no error will be thrown.
+            </summary>
+            <param name="registrationPredicate">Predicate to determine if a particular type should be registered</param>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.AutoRegister(TinyIoC.DuplicateImplementationActions)">
+            <summary>
+            Attempt to automatically register all non-generic classes and interfaces in the current app domain.
+            </summary>
+            <param name="duplicateAction">What action to take when encountering duplicate implementations of an interface/base class.</param>
+            <exception cref="T:TinyIoC.TinyIoCAutoRegistrationException"/>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.AutoRegister(TinyIoC.DuplicateImplementationActions,System.Func{System.Type,System.Boolean})">
+            <summary>
+            Attempt to automatically register all non-generic classes and interfaces in the current app domain.
+            Types will only be registered if they pass the supplied registration predicate.
+            </summary>
+            <param name="duplicateAction">What action to take when encountering duplicate implementations of an interface/base class.</param>
+            <param name="registrationPredicate">Predicate to determine if a particular type should be registered</param>
+            <exception cref="T:TinyIoC.TinyIoCAutoRegistrationException"/>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.AutoRegister(System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
+            <summary>
+            Attempt to automatically register all non-generic classes and interfaces in the specified assemblies
+            
+            If more than one class implements an interface then only one implementation will be registered
+            although no error will be thrown.
+            </summary>
+            <param name="assemblies">Assemblies to process</param>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.AutoRegister(System.Collections.Generic.IEnumerable{System.Reflection.Assembly},System.Func{System.Type,System.Boolean})">
+            <summary>
+            Attempt to automatically register all non-generic classes and interfaces in the specified assemblies
+            Types will only be registered if they pass the supplied registration predicate.
+            
+            If more than one class implements an interface then only one implementation will be registered
+            although no error will be thrown.
+            </summary>
+            <param name="assemblies">Assemblies to process</param>
+            <param name="registrationPredicate">Predicate to determine if a particular type should be registered</param>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.AutoRegister(System.Collections.Generic.IEnumerable{System.Reflection.Assembly},TinyIoC.DuplicateImplementationActions)">
+            <summary>
+            Attempt to automatically register all non-generic classes and interfaces in the specified assemblies
+            </summary>
+            <param name="assemblies">Assemblies to process</param>
+            <param name="duplicateAction">What action to take when encountering duplicate implementations of an interface/base class.</param>
+            <exception cref="T:TinyIoC.TinyIoCAutoRegistrationException"/>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.AutoRegister(System.Collections.Generic.IEnumerable{System.Reflection.Assembly},TinyIoC.DuplicateImplementationActions,System.Func{System.Type,System.Boolean})">
+            <summary>
+            Attempt to automatically register all non-generic classes and interfaces in the specified assemblies
+            Types will only be registered if they pass the supplied registration predicate.
+            </summary>
+            <param name="assemblies">Assemblies to process</param>
+            <param name="duplicateAction">What action to take when encountering duplicate implementations of an interface/base class.</param>
+            <param name="registrationPredicate">Predicate to determine if a particular type should be registered</param>
+            <exception cref="T:TinyIoC.TinyIoCAutoRegistrationException"/>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register(System.Type)">
+            <summary>
+            Creates/replaces a container class registration with default options.
+            </summary>
+            <param name="registerType">Type to register</param>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register(System.Type,System.String)">
+            <summary>
+            Creates/replaces a named container class registration with default options.
+            </summary>
+            <param name="registerType">Type to register</param>
+            <param name="name">Name of registration</param>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register(System.Type,System.Type)">
+            <summary>
+            Creates/replaces a container class registration with a given implementation and default options.
+            </summary>
+            <param name="registerType">Type to register</param>
+            <param name="registerImplementation">Type to instantiate that implements RegisterType</param>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register(System.Type,System.Type,System.String)">
+            <summary>
+            Creates/replaces a named container class registration with a given implementation and default options.
+            </summary>
+            <param name="registerType">Type to register</param>
+            <param name="registerImplementation">Type to instantiate that implements RegisterType</param>
+            <param name="name">Name of registration</param>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register(System.Type,System.Object)">
+            <summary>
+            Creates/replaces a container class registration with a specific, strong referenced, instance.
+            </summary>
+            <param name="registerType">Type to register</param>
+            <param name="instance">Instance of RegisterType to register</param>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register(System.Type,System.Object,System.String)">
+            <summary>
+            Creates/replaces a named container class registration with a specific, strong referenced, instance.
+            </summary>
+            <param name="registerType">Type to register</param>
+            <param name="instance">Instance of RegisterType to register</param>
+            <param name="name">Name of registration</param>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register(System.Type,System.Type,System.Object)">
+            <summary>
+            Creates/replaces a container class registration with a specific, strong referenced, instance.
+            </summary>
+            <param name="registerType">Type to register</param>
+            <param name="registerImplementation">Type of instance to register that implements RegisterType</param>
+            <param name="instance">Instance of RegisterImplementation to register</param>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register(System.Type,System.Type,System.Object,System.String)">
+            <summary>
+            Creates/replaces a named container class registration with a specific, strong referenced, instance.
+            </summary>
+            <param name="registerType">Type to register</param>
+            <param name="registerImplementation">Type of instance to register that implements RegisterType</param>
+            <param name="instance">Instance of RegisterImplementation to register</param>
+            <param name="name">Name of registration</param>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register(System.Type,System.Func{TinyIoC.TinyIoCContainer,TinyIoC.NamedParameterOverloads,System.Object})">
+            <summary>
+            Creates/replaces a container class registration with a user specified factory
+            </summary>
+            <param name="registerType">Type to register</param>
+            <param name="factory">Factory/lambda that returns an instance of RegisterType</param>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register(System.Type,System.Func{TinyIoC.TinyIoCContainer,TinyIoC.NamedParameterOverloads,System.Object},System.String)">
+            <summary>
+            Creates/replaces a container class registration with a user specified factory
+            </summary>
+            <param name="registerType">Type to register</param>
+            <param name="factory">Factory/lambda that returns an instance of RegisterType</param>
+            <param name="name">Name of registation</param>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register``1">
+            <summary>
+            Creates/replaces a container class registration with default options.
+            </summary>
+            <typeparam name="RegisterImplementation">Type to register</typeparam>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register``1(System.String)">
+            <summary>
+            Creates/replaces a named container class registration with default options.
+            </summary>
+            <typeparam name="RegisterImplementation">Type to register</typeparam>
+            <param name="name">Name of registration</param>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register``2">
+            <summary>
+            Creates/replaces a container class registration with a given implementation and default options.
+            </summary>
+            <typeparam name="RegisterType">Type to register</typeparam>
+            <typeparam name="RegisterImplementation">Type to instantiate that implements RegisterType</typeparam>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register``2(System.String)">
+            <summary>
+            Creates/replaces a named container class registration with a given implementation and default options.
+            </summary>
+            <typeparam name="RegisterType">Type to register</typeparam>
+            <typeparam name="RegisterImplementation">Type to instantiate that implements RegisterType</typeparam>
+            <param name="name">Name of registration</param>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register``1(``0)">
+            <summary>
+            Creates/replaces a container class registration with a specific, strong referenced, instance.
+            </summary>
+            <typeparam name="RegisterType">Type to register</typeparam>
+            <param name="instance">Instance of RegisterType to register</param>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register``1(``0,System.String)">
+            <summary>
+            Creates/replaces a named container class registration with a specific, strong referenced, instance.
+            </summary>
+            <typeparam name="RegisterType">Type to register</typeparam>
+            <param name="instance">Instance of RegisterType to register</param>
+            <param name="name">Name of registration</param>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register``2(``1)">
+            <summary>
+            Creates/replaces a container class registration with a specific, strong referenced, instance.
+            </summary>
+            <typeparam name="RegisterType">Type to register</typeparam>
+            <typeparam name="RegisterImplementation">Type of instance to register that implements RegisterType</typeparam>
+            <param name="instance">Instance of RegisterImplementation to register</param>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register``2(``1,System.String)">
+            <summary>
+            Creates/replaces a named container class registration with a specific, strong referenced, instance.
+            </summary>
+            <typeparam name="RegisterType">Type to register</typeparam>
+            <typeparam name="RegisterImplementation">Type of instance to register that implements RegisterType</typeparam>
+            <param name="instance">Instance of RegisterImplementation to register</param>
+            <param name="name">Name of registration</param>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register``1(System.Func{TinyIoC.TinyIoCContainer,TinyIoC.NamedParameterOverloads,``0})">
+            <summary>
+            Creates/replaces a container class registration with a user specified factory
+            </summary>
+            <typeparam name="RegisterType">Type to register</typeparam>
+            <param name="factory">Factory/lambda that returns an instance of RegisterType</param>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Register``1(System.Func{TinyIoC.TinyIoCContainer,TinyIoC.NamedParameterOverloads,``0},System.String)">
+            <summary>
+            Creates/replaces a named container class registration with a user specified factory
+            </summary>
+            <typeparam name="RegisterType">Type to register</typeparam>
+            <param name="factory">Factory/lambda that returns an instance of RegisterType</param>
+            <param name="name">Name of registation</param>
+            <returns>RegisterOptions for fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.RegisterMultiple``1(System.Collections.Generic.IEnumerable{System.Type})">
+            <summary>
+            Register multiple implementations of a type.
+            
+            Internally this registers each implementation using the full name of the class as its registration name.
+            </summary>
+            <typeparam name="RegisterType">Type that each implementation implements</typeparam>
+            <param name="implementationTypes">Types that implement RegisterType</param>
+            <returns>MultiRegisterOptions for the fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.RegisterMultiple(System.Type,System.Collections.Generic.IEnumerable{System.Type})">
+            <summary>
+            Register multiple implementations of a type.
+            
+            Internally this registers each implementation using the full name of the class as its registration name.
+            </summary>
+            <param name="registrationType">Type that each implementation implements</param>
+            <param name="implementationTypes">Types that implement RegisterType</param>
+            <returns>MultiRegisterOptions for the fluent API</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Resolve(System.Type)">
+            <summary>
+            Attempts to resolve a type using default options.
+            </summary>
+            <param name="resolveType">Type to resolve</param>
+            <returns>Instance of type</returns>
+            <exception cref="T:TinyIoC.TinyIoCResolutionException">Unable to resolve the type.</exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Resolve(System.Type,TinyIoC.ResolveOptions)">
+            <summary>
+            Attempts to resolve a type using specified options.
+            </summary>
+            <param name="resolveType">Type to resolve</param>
+            <param name="options">Resolution options</param>
+            <returns>Instance of type</returns>
+            <exception cref="T:TinyIoC.TinyIoCResolutionException">Unable to resolve the type.</exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Resolve(System.Type,System.String)">
+             <summary>
+             Attempts to resolve a type using default options and the supplied name.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             </summary>
+             <param name="resolveType">Type to resolve</param>
+             <param name="name">Name of registration</param>
+             <returns>Instance of type</returns>
+             <exception cref="T:TinyIoC.TinyIoCResolutionException">Unable to resolve the type.</exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Resolve(System.Type,System.String,TinyIoC.ResolveOptions)">
+             <summary>
+             Attempts to resolve a type using supplied options and  name.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             </summary>
+             <param name="resolveType">Type to resolve</param>
+             <param name="name">Name of registration</param>
+             <param name="options">Resolution options</param>
+             <returns>Instance of type</returns>
+             <exception cref="T:TinyIoC.TinyIoCResolutionException">Unable to resolve the type.</exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Resolve(System.Type,TinyIoC.NamedParameterOverloads)">
+             <summary>
+             Attempts to resolve a type using default options and the supplied constructor parameters.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             </summary>
+             <param name="resolveType">Type to resolve</param>
+             <param name="parameters">User specified constructor parameters</param>
+             <returns>Instance of type</returns>
+             <exception cref="T:TinyIoC.TinyIoCResolutionException">Unable to resolve the type.</exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Resolve(System.Type,TinyIoC.NamedParameterOverloads,TinyIoC.ResolveOptions)">
+             <summary>
+             Attempts to resolve a type using specified options and the supplied constructor parameters.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             </summary>
+             <param name="resolveType">Type to resolve</param>
+             <param name="parameters">User specified constructor parameters</param>
+             <param name="options">Resolution options</param>
+             <returns>Instance of type</returns>
+             <exception cref="T:TinyIoC.TinyIoCResolutionException">Unable to resolve the type.</exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Resolve(System.Type,System.String,TinyIoC.NamedParameterOverloads)">
+             <summary>
+             Attempts to resolve a type using default options and the supplied constructor parameters and name.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             </summary>
+             <param name="resolveType">Type to resolve</param>
+             <param name="parameters">User specified constructor parameters</param>
+             <param name="name">Name of registration</param>
+             <returns>Instance of type</returns>
+             <exception cref="T:TinyIoC.TinyIoCResolutionException">Unable to resolve the type.</exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Resolve(System.Type,System.String,TinyIoC.NamedParameterOverloads,TinyIoC.ResolveOptions)">
+             <summary>
+             Attempts to resolve a named type using specified options and the supplied constructor parameters.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             </summary>
+             <param name="resolveType">Type to resolve</param>
+             <param name="name">Name of registration</param>
+             <param name="parameters">User specified constructor parameters</param>
+             <param name="options">Resolution options</param>
+             <returns>Instance of type</returns>
+             <exception cref="T:TinyIoC.TinyIoCResolutionException">Unable to resolve the type.</exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Resolve``1">
+            <summary>
+            Attempts to resolve a type using default options.
+            </summary>
+            <typeparam name="ResolveType">Type to resolve</typeparam>
+            <returns>Instance of type</returns>
+            <exception cref="T:TinyIoC.TinyIoCResolutionException">Unable to resolve the type.</exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Resolve``1(TinyIoC.ResolveOptions)">
+            <summary>
+            Attempts to resolve a type using specified options.
+            </summary>
+            <typeparam name="ResolveType">Type to resolve</typeparam>
+            <param name="options">Resolution options</param>
+            <returns>Instance of type</returns>
+            <exception cref="T:TinyIoC.TinyIoCResolutionException">Unable to resolve the type.</exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Resolve``1(System.String)">
+             <summary>
+             Attempts to resolve a type using default options and the supplied name.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             </summary>
+             <typeparam name="ResolveType">Type to resolve</typeparam>
+             <param name="name">Name of registration</param>
+             <returns>Instance of type</returns>
+             <exception cref="T:TinyIoC.TinyIoCResolutionException">Unable to resolve the type.</exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Resolve``1(System.String,TinyIoC.ResolveOptions)">
+             <summary>
+             Attempts to resolve a type using supplied options and  name.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             </summary>
+             <typeparam name="ResolveType">Type to resolve</typeparam>
+             <param name="name">Name of registration</param>
+             <param name="options">Resolution options</param>
+             <returns>Instance of type</returns>
+             <exception cref="T:TinyIoC.TinyIoCResolutionException">Unable to resolve the type.</exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Resolve``1(TinyIoC.NamedParameterOverloads)">
+             <summary>
+             Attempts to resolve a type using default options and the supplied constructor parameters.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             </summary>
+             <typeparam name="ResolveType">Type to resolve</typeparam>
+             <param name="parameters">User specified constructor parameters</param>
+             <returns>Instance of type</returns>
+             <exception cref="T:TinyIoC.TinyIoCResolutionException">Unable to resolve the type.</exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Resolve``1(TinyIoC.NamedParameterOverloads,TinyIoC.ResolveOptions)">
+             <summary>
+             Attempts to resolve a type using specified options and the supplied constructor parameters.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             </summary>
+             <typeparam name="ResolveType">Type to resolve</typeparam>
+             <param name="parameters">User specified constructor parameters</param>
+             <param name="options">Resolution options</param>
+             <returns>Instance of type</returns>
+             <exception cref="T:TinyIoC.TinyIoCResolutionException">Unable to resolve the type.</exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Resolve``1(System.String,TinyIoC.NamedParameterOverloads)">
+             <summary>
+             Attempts to resolve a type using default options and the supplied constructor parameters and name.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             </summary>
+             <typeparam name="ResolveType">Type to resolve</typeparam>
+             <param name="parameters">User specified constructor parameters</param>
+             <param name="name">Name of registration</param>
+             <returns>Instance of type</returns>
+             <exception cref="T:TinyIoC.TinyIoCResolutionException">Unable to resolve the type.</exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.Resolve``1(System.String,TinyIoC.NamedParameterOverloads,TinyIoC.ResolveOptions)">
+             <summary>
+             Attempts to resolve a named type using specified options and the supplied constructor parameters.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             </summary>
+             <typeparam name="ResolveType">Type to resolve</typeparam>
+             <param name="name">Name of registration</param>
+             <param name="parameters">User specified constructor parameters</param>
+             <param name="options">Resolution options</param>
+             <returns>Instance of type</returns>
+             <exception cref="T:TinyIoC.TinyIoCResolutionException">Unable to resolve the type.</exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.CanResolve(System.Type)">
+             <summary>
+             Attempts to predict whether a given type can be resolved with default options.
+            
+             Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
+             </summary>
+             <param name="resolveType">Type to resolve</param>
+             <param name="name">Name of registration</param>
+             <returns>Bool indicating whether the type can be resolved</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.CanResolve(System.Type,System.String)">
+             <summary>
+             Attempts to predict whether a given named type can be resolved with default options.
+            
+             Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
+             </summary>
+             <param name="resolveType">Type to resolve</param>
+             <returns>Bool indicating whether the type can be resolved</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.CanResolve(System.Type,TinyIoC.ResolveOptions)">
+             <summary>
+             Attempts to predict whether a given type can be resolved with the specified options.
+            
+             Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
+             </summary>
+             <param name="resolveType">Type to resolve</param>
+             <param name="name">Name of registration</param>
+             <param name="options">Resolution options</param>
+             <returns>Bool indicating whether the type can be resolved</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.CanResolve(System.Type,System.String,TinyIoC.ResolveOptions)">
+             <summary>
+             Attempts to predict whether a given named type can be resolved with the specified options.
+            
+             Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
+             </summary>
+             <param name="resolveType">Type to resolve</param>
+             <param name="name">Name of registration</param>
+             <param name="options">Resolution options</param>
+             <returns>Bool indicating whether the type can be resolved</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.CanResolve(System.Type,TinyIoC.NamedParameterOverloads)">
+             <summary>
+             Attempts to predict whether a given type can be resolved with the supplied constructor parameters and default options.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             
+             Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
+             </summary>
+             <param name="resolveType">Type to resolve</param>
+             <param name="parameters">User supplied named parameter overloads</param>
+             <returns>Bool indicating whether the type can be resolved</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.CanResolve(System.Type,System.String,TinyIoC.NamedParameterOverloads)">
+             <summary>
+             Attempts to predict whether a given named type can be resolved with the supplied constructor parameters and default options.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             
+             Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
+             </summary>
+             <param name="resolveType">Type to resolve</param>
+             <param name="name">Name of registration</param>
+             <param name="parameters">User supplied named parameter overloads</param>
+             <returns>Bool indicating whether the type can be resolved</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.CanResolve(System.Type,TinyIoC.NamedParameterOverloads,TinyIoC.ResolveOptions)">
+             <summary>
+             Attempts to predict whether a given type can be resolved with the supplied constructor parameters options.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             
+             Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
+             </summary>
+             <param name="resolveType">Type to resolve</param>
+             <param name="parameters">User supplied named parameter overloads</param>
+             <param name="options">Resolution options</param>
+             <returns>Bool indicating whether the type can be resolved</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.CanResolve(System.Type,System.String,TinyIoC.NamedParameterOverloads,TinyIoC.ResolveOptions)">
+             <summary>
+             Attempts to predict whether a given named type can be resolved with the supplied constructor parameters options.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             
+             Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
+             </summary>
+             <param name="resolveType">Type to resolve</param>
+             <param name="name">Name of registration</param>
+             <param name="parameters">User supplied named parameter overloads</param>
+             <param name="options">Resolution options</param>
+             <returns>Bool indicating whether the type can be resolved</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.CanResolve``1">
+             <summary>
+             Attempts to predict whether a given type can be resolved with default options.
+            
+             Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
+             </summary>
+             <typeparam name="ResolveType">Type to resolve</typeparam>
+             <param name="name">Name of registration</param>
+             <returns>Bool indicating whether the type can be resolved</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.CanResolve``1(System.String)">
+             <summary>
+             Attempts to predict whether a given named type can be resolved with default options.
+            
+             Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
+             </summary>
+             <typeparam name="ResolveType">Type to resolve</typeparam>
+             <returns>Bool indicating whether the type can be resolved</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.CanResolve``1(TinyIoC.ResolveOptions)">
+             <summary>
+             Attempts to predict whether a given type can be resolved with the specified options.
+            
+             Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
+             </summary>
+             <typeparam name="ResolveType">Type to resolve</typeparam>
+             <param name="name">Name of registration</param>
+             <param name="options">Resolution options</param>
+             <returns>Bool indicating whether the type can be resolved</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.CanResolve``1(System.String,TinyIoC.ResolveOptions)">
+             <summary>
+             Attempts to predict whether a given named type can be resolved with the specified options.
+            
+             Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
+             </summary>
+             <typeparam name="ResolveType">Type to resolve</typeparam>
+             <param name="name">Name of registration</param>
+             <param name="options">Resolution options</param>
+             <returns>Bool indicating whether the type can be resolved</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.CanResolve``1(TinyIoC.NamedParameterOverloads)">
+             <summary>
+             Attempts to predict whether a given type can be resolved with the supplied constructor parameters and default options.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             
+             Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
+             </summary>
+             <typeparam name="ResolveType">Type to resolve</typeparam>
+             <param name="parameters">User supplied named parameter overloads</param>
+             <returns>Bool indicating whether the type can be resolved</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.CanResolve``1(System.String,TinyIoC.NamedParameterOverloads)">
+             <summary>
+             Attempts to predict whether a given named type can be resolved with the supplied constructor parameters and default options.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             
+             Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
+             </summary>
+             <typeparam name="ResolveType">Type to resolve</typeparam>
+             <param name="name">Name of registration</param>
+             <param name="parameters">User supplied named parameter overloads</param>
+             <returns>Bool indicating whether the type can be resolved</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.CanResolve``1(TinyIoC.NamedParameterOverloads,TinyIoC.ResolveOptions)">
+             <summary>
+             Attempts to predict whether a given type can be resolved with the supplied constructor parameters options.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             
+             Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
+             </summary>
+             <typeparam name="ResolveType">Type to resolve</typeparam>
+             <param name="parameters">User supplied named parameter overloads</param>
+             <param name="options">Resolution options</param>
+             <returns>Bool indicating whether the type can be resolved</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.CanResolve``1(System.String,TinyIoC.NamedParameterOverloads,TinyIoC.ResolveOptions)">
+             <summary>
+             Attempts to predict whether a given named type can be resolved with the supplied constructor parameters options.
+            
+             Parameters are used in conjunction with normal container resolution to find the most suitable constructor (if one exists).
+             All user supplied parameters must exist in at least one resolvable constructor of RegisterType or resolution will fail.
+             
+             Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
+             </summary>
+             <typeparam name="ResolveType">Type to resolve</typeparam>
+             <param name="name">Name of registration</param>
+             <param name="parameters">User supplied named parameter overloads</param>
+             <param name="options">Resolution options</param>
+             <returns>Bool indicating whether the type can be resolved</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.TryResolve(System.Type,System.Object@)">
+            <summary>
+            Attemps to resolve a type using the default options
+            </summary>
+            <param name="ResolveType">Type to resolve</param>
+            <param name="resolvedType">Resolved type or default if resolve fails</param>
+            <returns>True if resolved sucessfully, false otherwise</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.TryResolve(System.Type,TinyIoC.ResolveOptions,System.Object@)">
+            <summary>
+            Attemps to resolve a type using the given options
+            </summary>
+            <param name="ResolveType">Type to resolve</param>
+            <param name="options">Resolution options</param>
+            <param name="resolvedType">Resolved type or default if resolve fails</param>
+            <returns>True if resolved sucessfully, false otherwise</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.TryResolve(System.Type,System.String,System.Object@)">
+            <summary>
+            Attemps to resolve a type using the default options and given name
+            </summary>
+            <param name="ResolveType">Type to resolve</param>
+            <param name="name">Name of registration</param>
+            <param name="resolvedType">Resolved type or default if resolve fails</param>
+            <returns>True if resolved sucessfully, false otherwise</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.TryResolve(System.Type,System.String,TinyIoC.ResolveOptions,System.Object@)">
+            <summary>
+            Attemps to resolve a type using the given options and name
+            </summary>
+            <param name="ResolveType">Type to resolve</param>
+            <param name="name">Name of registration</param>
+            <param name="options">Resolution options</param>
+            <param name="resolvedType">Resolved type or default if resolve fails</param>
+            <returns>True if resolved sucessfully, false otherwise</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.TryResolve(System.Type,TinyIoC.NamedParameterOverloads,System.Object@)">
+            <summary>
+            Attemps to resolve a type using the default options and supplied constructor parameters
+            </summary>
+            <param name="ResolveType">Type to resolve</param>
+            <param name="parameters">User specified constructor parameters</param>
+            <param name="resolvedType">Resolved type or default if resolve fails</param>
+            <returns>True if resolved sucessfully, false otherwise</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.TryResolve(System.Type,System.String,TinyIoC.NamedParameterOverloads,System.Object@)">
+            <summary>
+            Attemps to resolve a type using the default options and supplied name and constructor parameters
+            </summary>
+            <param name="ResolveType">Type to resolve</param>
+            <param name="name">Name of registration</param>
+            <param name="parameters">User specified constructor parameters</param>
+            <param name="resolvedType">Resolved type or default if resolve fails</param>
+            <returns>True if resolved sucessfully, false otherwise</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.TryResolve(System.Type,TinyIoC.NamedParameterOverloads,TinyIoC.ResolveOptions,System.Object@)">
+            <summary>
+            Attemps to resolve a type using the supplied options and constructor parameters
+            </summary>
+            <param name="ResolveType">Type to resolve</param>
+            <param name="name">Name of registration</param>
+            <param name="parameters">User specified constructor parameters</param>
+            <param name="options">Resolution options</param>
+            <param name="resolvedType">Resolved type or default if resolve fails</param>
+            <returns>True if resolved sucessfully, false otherwise</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.TryResolve(System.Type,System.String,TinyIoC.NamedParameterOverloads,TinyIoC.ResolveOptions,System.Object@)">
+            <summary>
+            Attemps to resolve a type using the supplied name, options and constructor parameters
+            </summary>
+            <param name="ResolveType">Type to resolve</param>
+            <param name="name">Name of registration</param>
+            <param name="parameters">User specified constructor parameters</param>
+            <param name="options">Resolution options</param>
+            <param name="resolvedType">Resolved type or default if resolve fails</param>
+            <returns>True if resolved sucessfully, false otherwise</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.TryResolve``1(``0@)">
+            <summary>
+            Attemps to resolve a type using the default options
+            </summary>
+            <typeparam name="ResolveType">Type to resolve</typeparam>
+            <param name="resolvedType">Resolved type or default if resolve fails</param>
+            <returns>True if resolved sucessfully, false otherwise</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.TryResolve``1(TinyIoC.ResolveOptions,``0@)">
+            <summary>
+            Attemps to resolve a type using the given options
+            </summary>
+            <typeparam name="ResolveType">Type to resolve</typeparam>
+            <param name="options">Resolution options</param>
+            <param name="resolvedType">Resolved type or default if resolve fails</param>
+            <returns>True if resolved sucessfully, false otherwise</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.TryResolve``1(System.String,``0@)">
+            <summary>
+            Attemps to resolve a type using the default options and given name
+            </summary>
+            <typeparam name="ResolveType">Type to resolve</typeparam>
+            <param name="name">Name of registration</param>
+            <param name="resolvedType">Resolved type or default if resolve fails</param>
+            <returns>True if resolved sucessfully, false otherwise</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.TryResolve``1(System.String,TinyIoC.ResolveOptions,``0@)">
+            <summary>
+            Attemps to resolve a type using the given options and name
+            </summary>
+            <typeparam name="ResolveType">Type to resolve</typeparam>
+            <param name="name">Name of registration</param>
+            <param name="options">Resolution options</param>
+            <param name="resolvedType">Resolved type or default if resolve fails</param>
+            <returns>True if resolved sucessfully, false otherwise</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.TryResolve``1(TinyIoC.NamedParameterOverloads,``0@)">
+            <summary>
+            Attemps to resolve a type using the default options and supplied constructor parameters
+            </summary>
+            <typeparam name="ResolveType">Type to resolve</typeparam>
+            <param name="parameters">User specified constructor parameters</param>
+            <param name="resolvedType">Resolved type or default if resolve fails</param>
+            <returns>True if resolved sucessfully, false otherwise</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.TryResolve``1(System.String,TinyIoC.NamedParameterOverloads,``0@)">
+            <summary>
+            Attemps to resolve a type using the default options and supplied name and constructor parameters
+            </summary>
+            <typeparam name="ResolveType">Type to resolve</typeparam>
+            <param name="name">Name of registration</param>
+            <param name="parameters">User specified constructor parameters</param>
+            <param name="resolvedType">Resolved type or default if resolve fails</param>
+            <returns>True if resolved sucessfully, false otherwise</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.TryResolve``1(TinyIoC.NamedParameterOverloads,TinyIoC.ResolveOptions,``0@)">
+            <summary>
+            Attemps to resolve a type using the supplied options and constructor parameters
+            </summary>
+            <typeparam name="ResolveType">Type to resolve</typeparam>
+            <param name="name">Name of registration</param>
+            <param name="parameters">User specified constructor parameters</param>
+            <param name="options">Resolution options</param>
+            <param name="resolvedType">Resolved type or default if resolve fails</param>
+            <returns>True if resolved sucessfully, false otherwise</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.TryResolve``1(System.String,TinyIoC.NamedParameterOverloads,TinyIoC.ResolveOptions,``0@)">
+            <summary>
+            Attemps to resolve a type using the supplied name, options and constructor parameters
+            </summary>
+            <typeparam name="ResolveType">Type to resolve</typeparam>
+            <param name="name">Name of registration</param>
+            <param name="parameters">User specified constructor parameters</param>
+            <param name="options">Resolution options</param>
+            <param name="resolvedType">Resolved type or default if resolve fails</param>
+            <returns>True if resolved sucessfully, false otherwise</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.ResolveAll(System.Type,System.Boolean)">
+            <summary>
+            Returns all registrations of a type
+            </summary>
+            <param name="ResolveType">Type to resolveAll</param>
+            <param name="includeUnnamed">Whether to include un-named (default) registrations</param>
+            <returns>IEnumerable</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.ResolveAll(System.Type)">
+            <summary>
+            Returns all registrations of a type, both named and unnamed
+            </summary>
+            <param name="ResolveType">Type to resolveAll</param>
+            <returns>IEnumerable</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.ResolveAll``1(System.Boolean)">
+            <summary>
+            Returns all registrations of a type
+            </summary>
+            <typeparam name="ResolveType">Type to resolveAll</typeparam>
+            <param name="includeUnnamed">Whether to include un-named (default) registrations</param>
+            <returns>IEnumerable</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.ResolveAll``1">
+            <summary>
+            Returns all registrations of a type, both named and unnamed
+            </summary>
+            <typeparam name="ResolveType">Type to resolveAll</typeparam>
+            <param name="includeUnnamed">Whether to include un-named (default) registrations</param>
+            <returns>IEnumerable</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.BuildUp(System.Object)">
+            <summary>
+            Attempts to resolve all public property dependencies on the given object.
+            </summary>
+            <param name="input">Object to "build up"</param>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.BuildUp(System.Object,TinyIoC.ResolveOptions)">
+            <summary>
+            Attempts to resolve all public property dependencies on the given object using the given resolve options.
+            </summary>
+            <param name="input">Object to "build up"</param>
+            <param name="resolveOptions">Resolve options to use</param>
+        </member>
+        <member name="P:TinyIoC.TinyIoCContainer.Current">
+            <summary>
+            Lazy created Singleton instance of the container for simple scenarios
+            </summary>
+        </member>
+        <member name="T:TinyIoC.TinyIoCContainer.RegisterOptions">
+            <summary>
+            Registration options for "fluent" API
+            </summary>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.RegisterOptions.AsSingleton">
+            <summary>
+            Make registration a singleton (single instance) if possible
+            </summary>
+            <returns>RegisterOptions</returns>
+            <exception cref="!:TinyIoCInstantiationTypeException"></exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.RegisterOptions.AsMultiInstance">
+            <summary>
+            Make registration multi-instance if possible
+            </summary>
+            <returns>RegisterOptions</returns>
+            <exception cref="!:TinyIoCInstantiationTypeException"></exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.RegisterOptions.WithWeakReference">
+            <summary>
+            Make registration hold a weak reference if possible
+            </summary>
+            <returns>RegisterOptions</returns>
+            <exception cref="!:TinyIoCInstantiationTypeException"></exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.RegisterOptions.WithStrongReference">
+            <summary>
+            Make registration hold a strong reference if possible
+            </summary>
+            <returns>RegisterOptions</returns>
+            <exception cref="!:TinyIoCInstantiationTypeException"></exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.RegisterOptions.ToCustomLifetimeManager(TinyIoC.TinyIoCContainer.RegisterOptions,TinyIoC.TinyIoCContainer.ITinyIoCObjectLifetimeProvider,System.String)">
+            <summary>
+            Switches to a custom lifetime manager factory if possible.
+            
+            Usually used for RegisterOptions "To*" extension methods such as the ASP.Net per-request one.
+            </summary>
+            <param name="instance">RegisterOptions instance</param>
+            <param name="lifetimeProvider">Custom lifetime manager</param>
+            <param name="errorString">Error string to display if switch fails</param>
+            <returns>RegisterOptions</returns>
+        </member>
+        <member name="T:TinyIoC.TinyIoCContainer.MultiRegisterOptions">
+            <summary>
+            Registration options for "fluent" API when registering multiple implementations
+            </summary>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.MultiRegisterOptions.#ctor(System.Collections.Generic.IEnumerable{TinyIoC.TinyIoCContainer.RegisterOptions})">
+            <summary>
+            Initializes a new instance of the MultiRegisterOptions class.
+            </summary>
+            <param name="registerOptions">Registration options</param>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.MultiRegisterOptions.AsSingleton">
+            <summary>
+            Make registration a singleton (single instance) if possible
+            </summary>
+            <returns>RegisterOptions</returns>
+            <exception cref="!:TinyIoCInstantiationTypeException"></exception>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.MultiRegisterOptions.AsMultiInstance">
+            <summary>
+            Make registration multi-instance if possible
+            </summary>
+            <returns>MultiRegisterOptions</returns>
+            <exception cref="!:TinyIoCInstantiationTypeException"></exception>
+        </member>
+        <member name="T:TinyIoC.TinyIoCContainer.ITinyIoCObjectLifetimeProvider">
+            <summary>
+            Provides custom lifetime management for ASP.Net per-request lifetimes etc.
+            </summary>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.ITinyIoCObjectLifetimeProvider.GetObject">
+            <summary>
+            Gets the stored object if it exists, or null if not
+            </summary>
+            <returns>Object instance or null</returns>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.ITinyIoCObjectLifetimeProvider.SetObject(System.Object)">
+            <summary>
+            Store the object
+            </summary>
+            <param name="value">Object to store</param>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.ITinyIoCObjectLifetimeProvider.ReleaseObject">
+            <summary>
+            Release the object
+            </summary>
+        </member>
+        <member name="M:TinyIoC.TinyIoCContainer.ObjectFactoryBase.GetObject(System.Type,TinyIoC.TinyIoCContainer,TinyIoC.NamedParameterOverloads,TinyIoC.ResolveOptions)">
+            <summary>
+            Create the type
+            </summary>
+            <param name="requestedType">Type user requested to be resolved</param>
+            <param name="container">Container that requested the creation</param>
+            <param name="parameters">Any user parameters passed</param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="P:TinyIoC.TinyIoCContainer.ObjectFactoryBase.AssumeConstruction">
+            <summary>
+            Whether to assume this factory sucessfully constructs its objects
+            
+            Generally set to true for delegate style factories as CanResolve cannot delve
+            into the delegates they contain.
+            </summary>
+        </member>
+        <member name="P:TinyIoC.TinyIoCContainer.ObjectFactoryBase.CreatesType">
+            <summary>
+            The type the factory instantiates
+            </summary>
+        </member>
+        <member name="P:TinyIoC.TinyIoCContainer.ObjectFactoryBase.Constructor">
+            <summary>
+            Constructor to use, if specified
+            </summary>
+        </member>
+        <member name="T:TinyIoC.TinyIoCContainer.MultiInstanceFactory">
+            <summary>
+            IObjectFactory that creates new instances of types for each resolution
+            </summary>
+        </member>
+        <member name="T:TinyIoC.TinyIoCContainer.DelegateFactory">
+            <summary>
+            IObjectFactory that invokes a specified delegate to construct the object
+            </summary>
+        </member>
+        <member name="T:TinyIoC.TinyIoCContainer.WeakDelegateFactory">
+            <summary>
+            IObjectFactory that invokes a specified delegate to construct the object
+            Holds the delegate using a weak reference
+            </summary>
+        </member>
+        <member name="T:TinyIoC.TinyIoCContainer.InstanceFactory">
+            <summary>
+            Stores an particular instance to return for a type
+            </summary>
+        </member>
+        <member name="T:TinyIoC.TinyIoCContainer.WeakInstanceFactory">
+            <summary>
+            Stores an particular instance to return for a type
+            
+            Stores the instance with a weak reference
+            </summary>
+        </member>
+        <member name="T:TinyIoC.TinyIoCContainer.SingletonFactory">
+            <summary>
+            A factory that lazy instantiates a type and always returns the same instance
+            </summary>
+        </member>
+        <member name="T:TinyIoC.TinyIoCContainer.CustomObjectLifetimeFactory">
+            <summary>
+            A factory that offloads lifetime to an external lifetime provider
+            </summary>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.ISyntaxProvider.IsDisposed">
+            <summary>
+            Used to determine if we've finished a test and need to create a new syntax provider
+            </summary>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Click(System.Func{FluentAutomation.Interfaces.IElement})">
+            <summary>
+            Click a specified element.
+            </summary>
+            <param name="element"><see cref="T:FluentAutomation.Interfaces.IElement"/> factory function.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Click(System.Func{FluentAutomation.Interfaces.IElement},System.Int32,System.Int32)">
+            <summary>
+            Click a specified coordinate, starting from the position of the provided <paramref name="element"/>.
+            </summary>
+            <param name="element"><see cref="T:FluentAutomation.Interfaces.IElement"/> factory function.</param>
+            <param name="x">X-coordinate offset.</param>
+            <param name="y">Y-coordinate offset.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.DoubleClick(System.Func{FluentAutomation.Interfaces.IElement})">
+            <summary>
+            DoubleClick a specified element.
+            </summary>
+            <param name="element"><see cref="T:FluentAutomation.Interfaces.IElement"/> factory function.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.DoubleClick(System.Func{FluentAutomation.Interfaces.IElement},System.Int32,System.Int32)">
+            <summary>
+            DoubleClick a specified coordinate, starting from the position of the provided <paramref name="element"/>.
+            </summary>
+            <param name="element"><see cref="T:FluentAutomation.Interfaces.IElement"/> factory function.</param>
+            <param name="x">X-coordinate offset.</param>
+            <param name="y">Y-coordinate offset.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.RightClick(System.Func{FluentAutomation.Interfaces.IElement})">
+            <summary>
+            RightClick a specified element.
+            </summary>
+            <param name="element"><see cref="T:FluentAutomation.Interfaces.IElement"/> factory function.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Drag(System.Func{FluentAutomation.Interfaces.IElement})">
+            <summary>
+            Begin a Drag/Drop operation starting with the specified element.
+            </summary>
+            <param name="element"><see cref="T:FluentAutomation.Interfaces.IElement"/> factory function.</param>
+            <returns><c>DragDropSyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Drag(System.Int32,System.Int32)">
+            <summary>
+            Begin a Drag/Drop operation using coordinates.
+            </summary>
+            <param name="sourceX"></param>
+            <param name="sourceY"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Find(System.String)">
+            <summary>
+            Find an element matching <paramref name="selector"/>.
+            </summary>
+            <param name="selector">Sizzle DOM selector.</param>
+            <returns>IElement factory function for lazy access to elements.</returns>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.FindMultiple(System.String)">
+            <summary>
+            Find a set of elements matching <paramref name="selector"/>.
+            </summary>
+            <param name="selector"></param>
+            <returns>IElement factory function for lazy access to a collection of elements.</returns>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Focus(System.Func{FluentAutomation.Interfaces.IElement})">
+            <summary>
+            Sets the focus to a specific element.
+            </summary>
+            <param name="element">IElement factory function.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Hover(System.Func{FluentAutomation.Interfaces.IElement})">
+            <summary>
+            Causes the mouse to hover over a specified element.
+            </summary>
+            <param name="element">IElement factory function.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Hover(System.Func{FluentAutomation.Interfaces.IElement},System.Int32,System.Int32)">
+            <summary>
+            Causes the mouse to hover over a specific coordinate, starting from the position of the provided <paramref name="element"/>.
+            </summary>
+            <param name="element">IElement factory function.</param>
+            <param name="x">X-coordinate offset.</param>
+            <param name="y">Y-coordinate offset.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Upload(System.Func{FluentAutomation.Interfaces.IElement},System.Int32,System.Int32,System.String)">
+            <summary>
+            Upload a file via a standard <c><input type='file'></input></c> DOM element. Triggers a click event at the specified coordinate, starting from the position of the provided <paramref name="element"/>.
+            </summary>
+            <param name="element">IElement factory function for the <c><input type='file'></input></c> DOM element.</param>
+            <param name="x">X-coordinate offset.</param>
+            <param name="y">Y-coordinate offset.</param>
+            <param name="fileName">Path to the local file to be uploaded. Example: <c>C:\Users\Public\Pictures\Sample Pictures\Chrysanthemum.jpg</c></param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Upload(System.Func{FluentAutomation.Interfaces.IElement},System.String)">
+            <summary>
+            Upload a file via a standard <c><input type='file'></input></c> DOM element.
+            </summary>
+            <param name="element"></param>
+            <param name="fileName">Path to the local file to be uploaded. Example: <c>C:\Users\Public\Pictures\Sample Pictures\Chrysanthemum.jpg</c></param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Upload(System.String,System.Int32,System.Int32,System.String)">
+            <summary>
+            Upload a file via a standard <c><input type='file'></input></c> DOM element. Triggers a click event at the specified coordinate, starting from the position of the element matching <paramref name="selector"/>.
+            </summary>
+            <param name="selector">Selector for the <c><input type='file'></input></c> DOM element.</param>
+            <param name="x">X-coordinate offset.</param>
+            <param name="y">Y-coordinate offset.</param>
+            <param name="fileName">Path to the local file to be uploaded. Example: <c>C:\Users\Public\Pictures\Sample Pictures\Chrysanthemum.jpg</c></param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Upload(System.String,System.String)">
+            <summary>
+            Uploads a file via a standard <c><input type='file'></input></c> DOM element.
+            </summary>
+            <param name="selector">Selector for the <c><input type='file'></input></c> DOM element.</param>
+            <param name="fileName">Path to the local file to be uploaded. Example: <c>C:\Users\Public\Pictures\Sample Pictures\Chrysanthemum.jpg</c></param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.WaitUntil(System.Linq.Expressions.Expression{System.Action})">
+            <summary>
+            Wait until the provided <paramref name="conditionAction">action</paramref> succeeds. Intended for use with I.Expect.* methods.
+            </summary>
+            <param name="conditionAction">Action to be repeated until it succeeds or exceeds the timeout. <see cref="P:FluentAutomation.Settings.DefaultWaitUntilTimeout"/> determines the timeout.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.WaitUntil(System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
+            <summary>
+            Wait until the provided <paramref name="conditionFunc">function</paramref> returns <c>true</c>.
+            </summary>
+            <param name="conditionFunc">Function to be repeated until it returns true or exceeds the timeout. <see cref="P:FluentAutomation.Settings.DefaultWaitUntilTimeout"/> determines the timeout.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Click(System.Int32,System.Int32)">
+            <summary>
+            Click at the specified coordinates.
+            </summary>
+            <param name="x">X-coordinate.</param>
+            <param name="y">Y-coordinate</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Click(System.String)">
+            <summary>
+            Click the element matching <paramref name="selector"/>.
+            </summary>
+            <param name="selector">Sizzle selector.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Click(System.String,System.Int32,System.Int32)">
+            <summary>
+            Click a specified coordinate, starting from the position of the element matching <paramref name="selector"/>.
+            </summary>
+            <param name="selector">Sizzle selector.</param>
+            <param name="x">X-coordinate offset.</param>
+            <param name="y">Y-coordinate offset.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.DoubleClick(System.Int32,System.Int32)">
+            <summary>
+            DoubleClick at the specified coordinates.
+            </summary>
+            <param name="x">X-coordinate specified.</param>
+            <param name="y">Y-coordinate specified.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.DoubleClick(System.String)">
+            <summary>
+            DoubleClick the element matching <paramref name="selector"/>.
+            </summary>
+            <param name="selector">Sizzle selector.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.DoubleClick(System.String,System.Int32,System.Int32)">
+            <summary>
+            DoubleClick a specified coordinate, starting from the position of the element matching <paramref name="selector"/>.
+            </summary>
+            <param name="selector">Sizzle selector.</param>
+            <param name="x">X-coordinate offset.</param>
+            <param name="y">Y-coordinate offset.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.RightClick(System.String)">
+            <summary>
+            RightClick the element matching <paramref name="selector"/>.
+            </summary>
+            <param name="selector">Sizzle selector.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Drag(System.String)">
+            <summary>
+            Begin a Drag/Drop operation starting with the element matching <paramref name="selector"/>.
+            </summary>
+            <param name="selector">Sizzle selector.</param>
+            <returns><c>DragDropSyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Enter(System.Object)">
+            <summary>
+            Enter a number or other object value into a valid input or textarea. Syntactical candy to avoid having to call .ToString() on integers in tests.
+            </summary>
+            <param name="nonString">Value to enter into input or textarea.</param>
+            <returns><c>TextEntrySyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Enter(System.String)">
+            <summary>
+            Enter text into a valid input or textarea.
+            </summary>
+            <param name="text">Text to enter into input or textarea.</param>
+            <returns><c>TextEntrySyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Append(System.Object)">
+            <summary>
+            Append a number or other object value into a valid input or textarea. Syntactical candy to avoid having to call .ToString() on integers in tests.
+            </summary>
+            <param name="nonString">Value to enter into input or textarea.</param>
+            <returns><c>TextEntrySyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Append(System.String)">
+            <summary>
+            Append text into a valid input or textarea.
+            </summary>
+            <param name="text">Text to enter into input or textarea.</param>
+            <returns><c>TextEntrySyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Focus(System.String)">
+            <summary>
+            Sets the focus to element matching <paramref name="selector"/>.
+            </summary>
+            <param name="selector">Sizzle selector.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Hover(System.Int32,System.Int32)">
+            <summary>
+            Causes the mouse to hover over a specified coordinate.
+            </summary>
+            <param name="x">X-coordinate.</param>
+            <param name="y">Y-coordinate.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Hover(System.String)">
+            <summary>
+            Causes the mouse to hover over element matching <paramref name="selector"/>.
+            </summary>
+            <param name="selector"></param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Hover(System.String,System.Int32,System.Int32)">
+            <summary>
+            Causes the mouse to hover over a specific coordinate, starting from the position of the element matching <paramref name="selector"/>.
+            </summary>
+            <param name="selector">Sizzle selector.</param>
+            <param name="x">X-coordinate offset.</param>
+            <param name="y">Y-coordinate offset.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Open(System.String)">
+            <summary>
+            Open a web browser and navigate to specified URL
+            </summary>
+            <param name="url">Fully-qualified URL. Example: <c>http://google.com/</c></param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Open(System.Uri)">
+            <summary>
+            Open a web browser and navigate to the specified URI
+            </summary>
+            <param name="uri">Absolute URI. Example: <c>new Uri("http://www.google.com/");</c></param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Press(System.String)">
+            <summary>
+            Triggers keypress events using WinForms SendKeys.
+            </summary>
+            <param name="keys">WinForms SendKeys values. Example: <c>{ENTER}</c></param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Select(FluentAutomation.Option,System.String[])">
+            <summary>
+            Manipulates a <c>&lt;select /></c> DOM element by selecting options with matching <paramref name="values"/> using the specified <paramref name="mode"/>.
+            </summary>
+            <param name="mode">Mode of interaction with the <c>&lt;select /></c>; by Text, Value or Index.</param>
+            <param name="values">Options to be selected.</param>
+            <returns><c>SelectSyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Select(FluentAutomation.Option,System.String)">
+            <summary>
+            Manipulates a <c>&lt;select /></c> DOM element by selecting an option with matching <paramref name="value"/> using the specified <paramref name="mode"/>.
+            </summary>
+            <param name="mode">Mode of interaction with the <c>&lt;select /></c>; by Text, Value or Index.</param>
+            <param name="value">Option to be selected.</param>
+            <returns><c>SelectSyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Select(System.Int32[])">
+            <summary>
+            Manipulates a <c>&lt;select /></c> DOM element by selecting options at the specified <paramref name="indices"/>.
+            </summary>
+            <param name="indices">Options to be selected by Index.</param>
+            <returns><c>SelectSyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Select(System.String[])">
+            <summary>
+            Manipulates a <c>&lt;select /></c> DOM element by selecting options with matching <paramref name="text"/>.
+            </summary>
+            <param name="values">Options to be selected by Text.</param>
+            <returns><c>SelectSyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Select(System.Int32)">
+            <summary>
+            Manipulates a <c>&lt;select /></c> DOM element by selecting an option at the specified <paramref name="index"/>.
+            </summary>
+            <param name="index">Option to be selected by Index.</param>
+            <returns><c>SelectSyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Select(System.String)">
+            <summary>
+            Manipulates a <c>&lt;select /></c> DOM element by selecting an option with matching <paramref name="text"/>.
+            </summary>
+            <param name="text">Option to be selected by Text.</param>
+            <returns><c>SelectSyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.TakeScreenshot(System.String)">
+            <summary>
+            Takes a screenshot of the active web browser window.
+            </summary>
+            <param name="screenshotName">Filename to save the screenshot with.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Type(System.String)">
+            <summary>
+            Triggers Win32 events per character in the provided string. Not for use with WinForms SendKeys commands, only simple characters. Useful
+            for entering text into applications that can gain focus but do not have proper DOM representation for use with <see cref="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Enter(System.Object)"/>.
+            </summary>
+            <param name="text">String to be sent, one character at a time.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Wait(System.Int32)">
+            <summary>
+            Waits a determined period of time.
+            </summary>
+            <param name="seconds">Seconds to wait.</param>
+        </member>
+        <member name="M:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Wait(System.TimeSpan)">
+            <summary>
+            Waits a determined period of time.
+            </summary>
+            <param name="timeSpan">TimeSpan to wait.</param>
+        </member>
+        <member name="P:FluentAutomation.Interfaces.INativeActionSyntaxProvider.Expect">
+            <summary>
+            Expects - Fluent's assertion functionality.
+            </summary>
+        </member>
+        <member name="M:FluentAutomation.ActionSyntaxProvider.DragDropSyntaxProvider.To(System.String)">
+            <summary>
+            End Drag/Drop operation at element matching <paramref name="selector"/>.
+            </summary>
+            <param name="selector">Sizzle selector.</param>
+        </member>
+        <member name="M:FluentAutomation.ActionSyntaxProvider.DragDropSyntaxProvider.To(System.Func{FluentAutomation.Interfaces.IElement})">
+            <summary>
+            End Drag/Drop operation at specified <paramref name="targetElement"/>.
+            </summary>
+            <param name="targetElement">IElement factory function.</param>
+        </member>
+        <member name="M:FluentAutomation.ActionSyntaxProvider.DragDropByPositionSyntaxProvider.To(System.Int32,System.Int32)">
+            <summary>
+            End Drag/Drop operation at specified coordinates.
+            </summary>
+            <param name="destinationX">X coordinate</param>
+            <param name="destinationY">Y coordinate</param>
+        </member>
+        <member name="M:FluentAutomation.ActionSyntaxProvider.TextEntrySyntaxProvider.WithoutEvents">
+            <summary>
+            Set text entry to set value without firing key events. Faster, but may cause issues with applications
+            that bind to the keyup/keydown/keypress events to function.
+            </summary>
+            <returns><c>TextEntrySyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.ActionSyntaxProvider.TextEntrySyntaxProvider.Quickly">
+            <summary>
+            [deprecated] Use WithoutEvents() instead. To be removed in the future.
+            </summary>
+            <returns><c>TextEntrySyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.ActionSyntaxProvider.TextEntrySyntaxProvider.In(System.String)">
+            <summary>
+            Enter text into input or textarea element matching <paramref name="selector"/>.
+            </summary>
+            <param name="selector">Sizzle selector.</param>
+        </member>
+        <member name="M:FluentAutomation.ActionSyntaxProvider.TextEntrySyntaxProvider.In(System.Func{FluentAutomation.Interfaces.IElement})">
+            <summary>
+            Enter text into specified <paramref name="element"/>.
+            </summary>
+            <param name="element">IElement factory function.</param>
+        </member>
+        <member name="M:FluentAutomation.ActionSyntaxProvider.TextAppendSyntaxProvider.WithoutEvents">
+            <summary>
+            Set text entry to set value without firing key events. Faster, but may cause issues with applications
+            that bind to the keyup/keydown/keypress events to function.
+            </summary>
+            <returns><c>TextEntrySyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.ActionSyntaxProvider.TextAppendSyntaxProvider.Quickly">
+            <summary>
+            [deprecated] Use WithoutEvents() instead. To be removed in the future.
+            </summary>
+            <returns><c>TextEntrySyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.ActionSyntaxProvider.TextAppendSyntaxProvider.To(System.String)">
+            <summary>
+            Enter text into input or textarea element matching <paramref name="selector"/>.
+            </summary>
+            <param name="selector">Sizzle selector.</param>
+        </member>
+        <member name="M:FluentAutomation.ActionSyntaxProvider.TextAppendSyntaxProvider.To(System.Func{FluentAutomation.Interfaces.IElement})">
+            <summary>
+            Enter text into specified <paramref name="element"/>.
+            </summary>
+            <param name="element">IElement factory function.</param>
+        </member>
+        <member name="M:FluentAutomation.ActionSyntaxProvider.SelectSyntaxProvider.From(System.String)">
+            <summary>
+            Select from element matching <paramref name="selector"/>.
+            </summary>
+            <param name="selector">Sizzle selector.</param>
+        </member>
+        <member name="M:FluentAutomation.ActionSyntaxProvider.SelectSyntaxProvider.From(System.Func{FluentAutomation.Interfaces.IElement})">
+            <summary>
+            Select from specified <paramref name="element"/>.
+            </summary>
+            <param name="element">IElement factory function.</param>
+        </member>
+        <member name="T:FluentAutomation.Option">
+            <summary>
+            Option mode for <select /> manipulation: Text, Value or Index
+            </summary>
+        </member>
+        <member name="M:FluentAutomation.Exceptions.FluentException.PreserveStackTrace(System.Exception)">
+            <remarks>
+            Credit to MvcContrib.TestHelper.AssertionException for PreserveStackTrace
+            </remarks>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.Count(System.Int32)">
+            <summary>
+            Expect a specific count.
+            </summary>
+            <param name="count">Number of elements found.</param>
+            <returns><c>ExpectCountSyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.Class(System.String)">
+            <summary>
+            Expect that a matching CSS class is found.
+            </summary>
+            <param name="className">CSS class name. Example: .row</param>
+            <returns><c>ExpectClassSyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.Text(System.String)">
+            <summary>
+            Expect that Text matches specified <paramref name="text"/>.
+            </summary>
+            <param name="text">Text that must be exactly matched.</param>
+            <returns><c>ExpectTextSyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.Text(System.Linq.Expressions.Expression{System.Func{System.String,System.Boolean}})">
+            <summary>
+            Expect that Text provided to specified <paramref name="matchFunc">match function</paramref> returns true.
+            </summary>
+            <param name="matchFunc">Function to evaluate if Text matches. Example: (text) => text.Contains("Hello")</param>
+            <returns><c>ExpectTextSyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.Value(System.Int32)">
+            <summary>
+            Expect a specific integer <paramref name="value"/>
+            </summary>
+            <param name="value">Int32 value expected.</param>
+            <returns><c>ExpectValueSyntaxProvider</c></returns>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.Value(System.String)">
+            <summary>
+            Expect a specific string <paramref name="value"/>.
+            </summary>
+            <param name="value">String value.</param>
+            <returns><c>ExpectValueSyntaxProvider</c></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:FluentAutomation.ExpectSyntaxProvider.Value(System.Linq.Expressions.Expression{System.Func{System.String,System.Boolean}})" -->
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.Url(System.String)">
+            <summary>
+            Expect the current web browser's URL to match <paramref name="expectedUrl"/>.
+            </summary>
+            <param name="expectedUrl">Fully-qualified URL to be matched on.</param>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.Url(System.Uri)">
+            <summary>
+            Expect the current web browser's URI to match <paramref name="expectedUri"/>.
+            </summary>
+            <param name="expectedUri">Absolute URI to be matched on.</param>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.Url(System.Linq.Expressions.Expression{System.Func{System.Uri,System.Boolean}})">
+            <summary>
+            Expect the current web browser's URI provided to the specified <paramref name="uriExpression">URI expression</paramref> to return true;
+            </summary>
+            <param name="uriExpression">URI expression to be matched on.</param>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.True(System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
+            <summary>
+            Expect that an arbitrary <paramref name="matchFunc">matching function</paramref> returns true.
+            </summary>
+            <param name="matchFunc"></param>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.False(System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
+            <summary>
+            Expect that an arbitrary <paramref name="matchFunc">matching function</paramref> returns false.
+            </summary>
+            <param name="matchFunc"></param>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.Throws(System.Linq.Expressions.Expression{System.Action})">
+            <summary>
+            Expect that an arbitrary <paramref name="matchAction">action</paramref> throws an Exception.
+            </summary>
+            <param name="matchAction"></param>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.Exists(System.String)">
+            <summary>
+            Expect the element specified exists.
+            </summary>
+            <param name="selector">Element selector.</param>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.ExpectCountSyntaxProvider.Of(System.String)">
+            <summary>
+            Elements matching <paramref name="selector"/> to be counted.
+            </summary>
+            <param name="selector">Sizzle selector.</param>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.ExpectCountSyntaxProvider.Of(System.Func{System.Collections.Generic.IEnumerable{FluentAutomation.Interfaces.IElement}})">
+            <summary>
+            Specified <paramref name="elements"/> to be counted.
+            </summary>
+            <param name="elements">IElement collection factory function.</param>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.ExpectClassSyntaxProvider.On(System.String)">
+            <summary>
+            Element matching <paramref name="selector"/> that should have matching CSS class.
+            </summary>
+            <param name="selector">Sizzle selector.</param>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.ExpectClassSyntaxProvider.On(System.Func{FluentAutomation.Interfaces.IElement})">
+            <summary>
+            Specified <paramref name="element"/> that should have matching CSS class.
+            </summary>
+            <param name="element">IElement factory function.</param>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.ExpectTextSyntaxProvider.In(System.String)">
+            <summary>
+            Element matching <paramref name="selector"/> that should match Text.
+            </summary>
+            <param name="selector">Sizzle selector.</param>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.ExpectTextSyntaxProvider.In(System.Func{FluentAutomation.Interfaces.IElement})">
+            <summary>
+            Specified <paramref name="element"/> that should match Text.
+            </summary>
+            <param name="element">IElement factory function.</param>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.ExpectValueSyntaxProvider.In(System.String)">
+            <summary>
+            Element matching <paramref name="selector"/> that should have a matching Value.
+            </summary>
+            <param name="selector"></param>
+        </member>
+        <member name="M:FluentAutomation.ExpectSyntaxProvider.ExpectValueSyntaxProvider.In(System.Func{FluentAutomation.Interfaces.IElement})">
+            <summary>
+            Specified <paramref name="element"/> that should have a matching Value.
+            </summary>
+            <param name="element"></param>
+        </member>
+        <member name="T:FluentAutomation.FluentTest">
+            <summary>
+            FluentTest - To be extended by tests targeting FluentAutomation. In the constructor, a user should call an appropriate bootstrap function from a FluentAutomation Provider.
+            </summary>
+        </member>
+        <member name="P:FluentAutomation.FluentTest.I">
+            <summary>
+            Actions - Fluent's action functionality.
+            </summary>
+        </member>
+        <member name="P:FluentAutomation.Settings.DefaultWaitUntilTimeout">
+            <summary>
+            Time to wait before assuming the provided WaitUntil() condition will never be reached. Defaults to 30 seconds.
+            </summary>
+        </member>
+        <member name="P:FluentAutomation.Settings.DefaultWaitUntilThreadSleep">
+            <summary>
+            Time to wait before attempting to validate the provided condition for WatiUntil(). Defaults to 100 milliseconds.
+            </summary>
+        </member>
+        <member name="P:FluentAutomation.Settings.WaitOnAllCommands">
+            <summary>
+            Wait on all comamnds to be successful. Removes the need for explicit I.WaitUntil() calls for actions
+            </summary>
+        </member>
+        <member name="P:FluentAutomation.Settings.WaitOnAllExpects">
+            <summary>
+            Wait on all I.Expect.* actions to be successful. Removes the need for explicit I.WaitUntil() calls.
+            </summary>
+        </member>
+        <member name="P:FluentAutomation.Settings.MinimizeAllWindowsOnTestStart">
+            <summary>
+            Determines whether or not windows will automatically be minimized on start of test execution and reverted when finished. Defaults to true.
+            </summary>
+        </member>
+        <member name="P:FluentAutomation.Settings.WindowHeight">
+            <summary>
+            Determines the height of the automated browser window. Defaults to null, which will use the provider defaults.
+            </summary>
+        </member>
+        <member name="P:FluentAutomation.Settings.WindowWidth">
+            <summary>
+            Determines the width of the automated browser window. Defaults to null, which will use the provider defaults.
+            </summary>
+        </member>
+    </members>
+</doc>
