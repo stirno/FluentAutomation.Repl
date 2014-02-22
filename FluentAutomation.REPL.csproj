@@ -63,10 +63,10 @@
       <HintPath>packages\Common.Logging.Log4Net.2.0.1\lib\net20\Common.Logging.Log4Net.dll</HintPath>
     </Reference>
     <Reference Include="FluentAutomation.Core">
-      <HintPath>packages\FluentAutomation.Core.2.1.0.1\lib\net40\FluentAutomation.Core.dll</HintPath>
+      <HintPath>packages\FluentAutomation.Core.2.3.0.1\lib\net40\FluentAutomation.Core.dll</HintPath>
     </Reference>
     <Reference Include="FluentAutomation.SeleniumWebDriver">
-      <HintPath>packages\FluentAutomation.SeleniumWebDriver.2.1.0.1\lib\net40\FluentAutomation.SeleniumWebDriver.dll</HintPath>
+      <HintPath>packages\FluentAutomation.SeleniumWebDriver.2.3.0.1\lib\net40\FluentAutomation.SeleniumWebDriver.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
@@ -74,8 +74,8 @@
     <Reference Include="Microsoft.Web.XmlTransform">
       <HintPath>packages\Microsoft.Web.Xdt.1.0.0\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NuGet.Core, Version=2.7.40808.167, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -88,19 +88,16 @@
       <HintPath>packages\Roslyn.Compilers.CSharp.1.2.20906.2\lib\net45\Roslyn.Compilers.CSharp.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCs.Contracts">
-      <HintPath>packages\ScriptCs.Contracts.0.8.0\lib\net45\ScriptCs.Contracts.dll</HintPath>
+      <HintPath>packages\ScriptCs.Contracts.0.9.0\lib\net45\ScriptCs.Contracts.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCs.Core">
-      <HintPath>packages\ScriptCs.Core.0.8.0\lib\net45\ScriptCs.Core.dll</HintPath>
+      <HintPath>packages\ScriptCs.Core.0.9.0\lib\net45\ScriptCs.Core.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCs.Engine.Roslyn">
-      <HintPath>packages\ScriptCs.Engine.Roslyn.0.8.0\lib\net45\ScriptCs.Engine.Roslyn.dll</HintPath>
+      <HintPath>packages\ScriptCs.Engine.Roslyn.0.9.0\lib\net45\ScriptCs.Engine.Roslyn.dll</HintPath>
     </Reference>
     <Reference Include="ScriptCs.Hosting">
-      <HintPath>packages\ScriptCs.Hosting.0.8.0\lib\net45\ScriptCs.Hosting.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Text">
-      <HintPath>packages\ServiceStack.Text.3.9.64\lib\net35\ServiceStack.Text.dll</HintPath>
+      <HintPath>packages\ScriptCs.Hosting.0.9.0\lib\net45\ScriptCs.Hosting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -114,10 +111,10 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WebDriver">
-      <HintPath>packages\Selenium.WebDriver.2.34.0\lib\net40\WebDriver.dll</HintPath>
+      <HintPath>packages\Selenium.WebDriver.2.39.0\lib\net40\WebDriver.dll</HintPath>
     </Reference>
     <Reference Include="WebDriver.Support">
-      <HintPath>packages\Selenium.Support.2.34.0\lib\net40\WebDriver.Support.dll</HintPath>
+      <HintPath>packages\Selenium.Support.2.39.0\lib\net40\WebDriver.Support.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

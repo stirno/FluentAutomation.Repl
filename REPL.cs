@@ -61,7 +61,7 @@ namespace FluentAutomation.REPL
 
         private void InitRepl()
         {
-            var servicesBuilder = new ReplScriptServicesBuilder(new ScriptConsole(), new Common.Logging.Simple.NoOpLogger()).InMemory(true).Repl(true);
+            var servicesBuilder = new ReplScriptServicesBuilder(new ScriptConsole(), new Common.Logging.Simple.NoOpLogger()).Repl(true);
             servicesBuilder.ScriptName("F14N.REPL");
 
             this.scriptServices = servicesBuilder.Build();
@@ -94,9 +94,9 @@ namespace FluentAutomation.REPL
             this.viewModel.Browser = browser;
             this.fluentGuid = "__a" + Guid.NewGuid().ToString().Replace("-", "");
 
-            var result = this.repl.Execute("FluentAutomation.SeleniumWebDriver.Bootstrap(FluentAutomation.SeleniumWebDriver.Browser." + browser.ToString() + "); var " + this.fluentGuid + " = new FluentAutomation.FluentTest(); var I = " + this.fluentGuid + ".I; var Container = " + this.fluentGuid + ".Container;");
+            var result = this.repl.Execute("FluentAutomation.SeleniumWebDriver.Bootstrap(FluentAutomation.SeleniumWebDriver.Browser." + browser.ToString() + "); var " + this.fluentGuid + " = new FluentAutomation.FluentTest(); var I = " + this.fluentGuid + ".I; var Container = " + this.fluentGuid + ".Session.Container;");
 
-            if (result.CompileExceptionInfo != null)
+           if (result.CompileExceptionInfo != null)
                 this.consoleTextBox.Text += "\n" + result.CompileExceptionInfo.SourceException.ToString() + "\n";
             else if (result.ExecuteExceptionInfo != null)
                 consoleTextBox.Text += "\n" + result.ExecuteExceptionInfo.SourceException.ToString() + "\n";
